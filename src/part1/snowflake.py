@@ -1,6 +1,14 @@
 import time
-from constants import EPOCH_MS_DEFAULT ,NODE_ID_DEFAULT, TIMESTAMP_BITS ,NODE_ID_BITS , \
-SEQUENCE_ID_BITS ,TIMESTAMP_MS_MAX ,NODE_ID_MAX ,SEQUENCE_ID_MAX ,NODE_ID_SHIFT ,TIMESTAMP_SHIFT
+
+from constants import (
+    EPOCH_MS_DEFAULT,
+    NODE_ID_DEFAULT,
+    NODE_ID_MAX,
+    NODE_ID_SHIFT,
+    SEQUENCE_ID_MAX,
+    TIMESTAMP_MS_MAX,
+    TIMESTAMP_SHIFT,
+)
 
 
 def read_current_millis(epoch_ms: int) -> int:
@@ -22,9 +30,9 @@ def decode_sequence_id(snowflake_id: int) -> int:
 def generate_snowflake_id(sequence_id: int, node_id: int = NODE_ID_DEFAULT, epoch_ms: int = EPOCH_MS_DEFAULT) -> int | None:
     current_millis = read_current_millis(epoch_ms)
     if current_millis < 0 or current_millis > TIMESTAMP_MS_MAX:
-        raise ValueError('Превышен максимальный лимит времени')
+        raise ValueError("Превышен максимальный лимит времени")
     if node_id < 0 or node_id > NODE_ID_MAX:
-        raise ValueError('Node Id выходит за допустимые пределы')
+        raise ValueError("Node Id выходит за допустимые пределы")
     if sequence_id < 0 or sequence_id > SEQUENCE_ID_MAX:
-        raise ValueError('Sequence Id выходит за допустимые пределы')
+        raise ValueError("Sequence Id выходит за допустимые пределы")
     return (current_millis * (2 ** TIMESTAMP_SHIFT)) + (node_id * (2 ** NODE_ID_SHIFT) + sequence_id)
