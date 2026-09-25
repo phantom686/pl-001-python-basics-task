@@ -1,12 +1,14 @@
 import time
-
-from constants import (
+from .constants import (
     EPOCH_MS_DEFAULT,
     NODE_ID_DEFAULT,
-    NODE_ID_MAX,
-    NODE_ID_SHIFT,
-    SEQUENCE_ID_MAX,
+    TIMESTAMP_BITS,
+    NODE_ID_BITS,
+    SEQUENCE_ID_BITS,
     TIMESTAMP_MS_MAX,
+    NODE_ID_MAX,
+    SEQUENCE_ID_MAX,
+    NODE_ID_SHIFT,
     TIMESTAMP_SHIFT,
 )
 
