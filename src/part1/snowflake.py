@@ -2,10 +2,10 @@ import time
 from .constants import (
     EPOCH_MS_DEFAULT,
     NODE_ID_DEFAULT,
-    TIMESTAMP_MS_MAX,
     NODE_ID_MAX,
-    SEQUENCE_ID_MAX,
     NODE_ID_SHIFT,
+    SEQUENCE_ID_MAX,
+    TIMESTAMP_MS_MAX,
     TIMESTAMP_SHIFT,
 )
 
