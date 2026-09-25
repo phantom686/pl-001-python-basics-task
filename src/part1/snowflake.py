@@ -1,4 +1,8 @@
 import time
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a6dc3dfa928505efc4315c091d3699c0de1bf4a
 from .constants import (
     EPOCH_MS_DEFAULT,
     NODE_ID_DEFAULT,
@@ -14,25 +18,25 @@ from .constants import (
 
 
 def read_current_millis(epoch_ms: int) -> int:
-    return int(time.time() * 1000) - epoch_ms
+    return int(int(time.time() * 1000) - epoch_ms)
 
 
 def decode_timestamp_ms(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> int:
-    return snowflake_id // (2**TIMESTAMP_SHIFT) + epoch_ms
+    return int(snowflake_id // (2**TIMESTAMP_SHIFT) + epoch_ms)
 
 
 def decode_node_id(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> int:
-    return (
+    return int((
         snowflake_id
         - (
             (decode_timestamp_ms(snowflake_id, epoch_ms) - epoch_ms)
             * 2**TIMESTAMP_SHIFT
         )
-    ) // (2**NODE_ID_SHIFT)
+    ) // (2**NODE_ID_SHIFT))
 
 
 def decode_sequence_id(snowflake_id: int) -> int:
-    return snowflake_id - ((snowflake_id // 2**NODE_ID_SHIFT) * (2**NODE_ID_SHIFT))
+    return int(snowflake_id - ((snowflake_id // 2**NODE_ID_SHIFT) * (2**NODE_ID_SHIFT)))
 
 
 def generate_snowflake_id(
@@ -45,6 +49,6 @@ def generate_snowflake_id(
         raise ValueError("Node Id выходит за допустимые пределы")
     if sequence_id < 0 or sequence_id > SEQUENCE_ID_MAX:
         raise ValueError("Sequence Id выходит за допустимые пределы")
-    return (current_millis * (2**TIMESTAMP_SHIFT)) + (
+    return int((current_millis * (2**TIMESTAMP_SHIFT)) + (
         node_id * (2**NODE_ID_SHIFT) + sequence_id
-    )
+    ))
