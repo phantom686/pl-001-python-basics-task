@@ -20,13 +20,16 @@ def decode_timestamp_ms(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> 
 
 
 def decode_node_id(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> int:
-    return int((
-        snowflake_id
-        - (
-            (decode_timestamp_ms(snowflake_id, epoch_ms) - epoch_ms)
-            * 2**TIMESTAMP_SHIFT
+    return int(
+        (
+            snowflake_id
+            - (
+                (decode_timestamp_ms(snowflake_id, epoch_ms) - epoch_ms)
+                * 2**TIMESTAMP_SHIFT
+            )
         )
-    ) // (2**NODE_ID_SHIFT))
+        // (2**NODE_ID_SHIFT)
+    )
 
 
 def decode_sequence_id(snowflake_id: int) -> int:
@@ -43,6 +46,7 @@ def generate_snowflake_id(
         raise ValueError("Node Id выходит за допустимые пределы")
     if sequence_id < 0 or sequence_id > SEQUENCE_ID_MAX:
         raise ValueError("Sequence Id выходит за допустимые пределы")
-    return int((current_millis * (2**TIMESTAMP_SHIFT)) + (
-        node_id * (2**NODE_ID_SHIFT) + sequence_id
-    ))
+    return int(
+        (current_millis * (2**TIMESTAMP_SHIFT))
+        + (node_id * (2**NODE_ID_SHIFT) + sequence_id)
+    )
