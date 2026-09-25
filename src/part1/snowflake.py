@@ -1,8 +1,4 @@
 import time
-<<<<<<< HEAD
-=======
-
->>>>>>> 3a6dc3dfa928505efc4315c091d3699c0de1bf4a
 from .constants import (
     EPOCH_MS_DEFAULT,
     NODE_ID_DEFAULT,
