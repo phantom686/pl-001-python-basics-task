@@ -16,18 +16,26 @@ def read_current_millis(epoch_ms: int) -> int:
 
 
 def decode_timestamp_ms(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> int:
-    return snowflake_id // (2 ** TIMESTAMP_SHIFT) + epoch_ms
+    return snowflake_id // (2**TIMESTAMP_SHIFT) + epoch_ms
 
 
 def decode_node_id(snowflake_id: int, epoch_ms: int = EPOCH_MS_DEFAULT) -> int:
-    return (snowflake_id - ((decode_timestamp_ms(snowflake_id, epoch_ms) - epoch_ms) * 2 ** TIMESTAMP_SHIFT)) // (2 ** NODE_ID_SHIFT)
+    return (
+        snowflake_id
+        - (
+            (decode_timestamp_ms(snowflake_id, epoch_ms) - epoch_ms)
+            * 2**TIMESTAMP_SHIFT
+        )
+    ) // (2**NODE_ID_SHIFT)
 
 
 def decode_sequence_id(snowflake_id: int) -> int:
-    return snowflake_id - ((snowflake_id // 2 ** NODE_ID_SHIFT) * (2 ** NODE_ID_SHIFT))
+    return snowflake_id - ((snowflake_id // 2**NODE_ID_SHIFT) * (2**NODE_ID_SHIFT))
 
 
-def generate_snowflake_id(sequence_id: int, node_id: int = NODE_ID_DEFAULT, epoch_ms: int = EPOCH_MS_DEFAULT) -> int | None:
+def generate_snowflake_id(
+    sequence_id: int, node_id: int = NODE_ID_DEFAULT, epoch_ms: int = EPOCH_MS_DEFAULT
+) -> int | None:
     current_millis = read_current_millis(epoch_ms)
     if current_millis < 0 or current_millis > TIMESTAMP_MS_MAX:
         raise ValueError("Превышен максимальный лимит времени")
@@ -35,4 +43,6 @@ def generate_snowflake_id(sequence_id: int, node_id: int = NODE_ID_DEFAULT, epoc
         raise ValueError("Node Id выходит за допустимые пределы")
     if sequence_id < 0 or sequence_id > SEQUENCE_ID_MAX:
         raise ValueError("Sequence Id выходит за допустимые пределы")
-    return (current_millis * (2 ** TIMESTAMP_SHIFT)) + (node_id * (2 ** NODE_ID_SHIFT) + sequence_id)
+    return (current_millis * (2**TIMESTAMP_SHIFT)) + (
+        node_id * (2**NODE_ID_SHIFT) + sequence_id
+    )
