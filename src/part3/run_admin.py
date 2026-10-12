@@ -52,28 +52,28 @@ def run_command(storage: list[Product], line: str) -> bool:
         return True
     elif cmd == "read" and len(parts) == 2:
         pid = int(parts[1])
-        res: tuple[int, str, Decimal, int] | None = read_product(storage, pid)
+        res = read_product(storage, pid)
         print_result(res)
         return True
     elif cmd == "delete" and len(parts) == 2:
         pid = int(parts[1])
-        res = delete_product(storage, pid)
-        print_result(res)
+        res1 = delete_product(storage, pid)
+        print_result(res1)
         return True
     elif cmd == "create" and len(parts) >= 4:
         qty = int(parts[-1])
         price = Decimal(parts[-2])
         name = " ".join(parts[1:-2])
-        res = create_product(storage, (name, price, qty))
-        print_result(res)
+        res2 = create_product(storage, (name, price, qty))
+        print_result(res2)
         return True
     elif cmd == "update" and len(parts) >= 5:
         pid = int(parts[1])
         qty = int(parts[-1])
         price = Decimal(parts[-2])
         name = " ".join(parts[2:-2])
-        res = update_product(storage, pid, (name, price, qty))
-        print_result(res)
+        res3 = update_product(storage, pid, (name, price, qty))
+        print_result(res3)
         return True
     print(f"'{line}' is not a command")
     return True
