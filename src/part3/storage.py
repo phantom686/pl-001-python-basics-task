@@ -1,6 +1,7 @@
 from decimal import Decimal
 from typing import Final
 
+
 type Product = tuple[int, str, Decimal, int]
 
 PRODUCT_ID_INDEX: Final = 0

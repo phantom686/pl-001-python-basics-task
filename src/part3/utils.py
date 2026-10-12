@@ -1,7 +1,8 @@
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Final
 
-from .storage import Product, PRODUCT_ID_INDEX, NAME_INDEX, PRICE_INDEX, QUANTITY_INDEX
+from .storage import NAME_INDEX, PRICE_INDEX, PRODUCT_ID_INDEX, QUANTITY_INDEX, Product
+
 
 PRICE_PRECISION: Final[int] = 2
 PRICE_STEP: Final = Decimal(1).scaleb(-PRICE_PRECISION)
