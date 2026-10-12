@@ -64,9 +64,7 @@ def run_command(storage: list[Product], line: str) -> bool:
         qty = int(parts[-1])
         price = Decimal(parts[-2])
         name = " ".join(parts[1:-2])
-        res = create_product(
-            storage, (name, price, qty)
-        )
+        res = create_product(storage, (name, price, qty))
         print_result(res)
         return True
     elif cmd == "update" and len(parts) >= 5:
