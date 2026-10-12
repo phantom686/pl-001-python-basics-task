@@ -23,7 +23,7 @@ def get_storage_str_representation(storage: list[Product]) -> str:
     w_name = len(TABLE_HEADERS[1])
     w_price = len(TABLE_HEADERS[2])
     w_qty = len(TABLE_HEADERS[3])
-    rows = []
+    rows: list[tuple[str, str, str,str]] = []
     for p in storage:
         pid_str = str(p[PRODUCT_ID_INDEX])
         name_str = str(p[NAME_INDEX])
@@ -43,7 +43,7 @@ def get_storage_str_representation(storage: list[Product]) -> str:
     sep = f"|-{'-' * w_id}-|-{'-' * w_name}-|-{'-' * w_price}-|-{'-' * w_qty}-|"
     lines.append(sep)
 
-    for p in rows:
-        lines.append(format_row(*p))
+    for row in rows:
+        lines.append(format_row(*row))
 
     return "\n".join(lines)
