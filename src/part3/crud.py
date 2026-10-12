@@ -1,11 +1,9 @@
 from decimal import Decimal
 
-from .storage import (  # noqa: F401
+from .storage import (
     NAME_INDEX,
-    PRICE_INDEX,
     PRODUCT_ID_INDEX,
     PRODUCT_ID_MIN,
-    QUANTITY_INDEX,
     Product,
 )
 from .utils import normalize_price, normalize_product_name
@@ -68,9 +66,9 @@ def update_product(
             print(f"product name '{name}' is already taken")
             return None
     norm_price = normalize_price(price)
-    update_product = (product_id, name, norm_price, qty)
-    storage[target_idx] = update_product
-    return update_product
+    update_tuple = (product_id, name, norm_price, qty)
+    storage[target_idx] = update_tuple
+    return update_tuple
 
 
 def delete_product(storage: list[Product], product_id: int) -> int | None:
