@@ -57,14 +57,14 @@ def run_command(storage: list[Product], line: str) -> bool:
         return True
     elif cmd == "delete" and len(parts) == 2:
         pid = int(parts[1])
-        res = delete_product(storage, pid)
+        res: tuple[int, str, Decimal, int] | None = delete_product(storage, pid)
         print_result(res)
         return True
     elif cmd == "create" and len(parts) >= 4:
         qty = int(parts[-1])
         price = Decimal(parts[-2])
         name = " ".join(parts[1:-2])
-        res = create_product(storage, (name, price, qty))
+        res: tuple[int, str, Decimal, int] | None = create_product(storage, (name, price, qty))
         print_result(res)
         return True
     elif cmd == "update" and len(parts) >= 5:
