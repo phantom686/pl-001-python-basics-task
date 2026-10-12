@@ -52,7 +52,7 @@ def run_command(storage: list[Product], line: str) -> bool:
         return True
     elif cmd == "read" and len(parts) == 2:
         pid = int(parts[1])
-        res = read_product(storage, pid)
+        res: tuple[int, str, Decimal, int] | None = read_product(storage, pid)
         print_result(res)
         return True
     elif cmd == "delete" and len(parts) == 2:
