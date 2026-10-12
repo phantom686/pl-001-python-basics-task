@@ -23,7 +23,7 @@ def get_storage_str_representation(storage: list[Product]) -> str:
     w_name = len(TABLE_HEADERS[1])
     w_price = len(TABLE_HEADERS[2])
     w_qty = len(TABLE_HEADERS[3])
-    rows: list[tuple[str, str, str,str]] = []
+    rows: list[tuple[str, str, str, str]] = []
     for p in storage:
         pid_str = str(p[PRODUCT_ID_INDEX])
         name_str = str(p[NAME_INDEX])
